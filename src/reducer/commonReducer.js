@@ -13,7 +13,6 @@ const commonReducer = (state = INITIAL_STATE, action) => {
             return { ...state, newsfeedSavedList: action.payload }
         default: return state
     }
-
 }
 
 export default commonReducer

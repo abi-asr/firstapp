@@ -6,39 +6,36 @@ import { connect } from "react-redux"
 import { username } from "../../action/commonAction"
 import "./Login.css"
 import { EMPTY, HOMEPATH, LOGIN } from "../../Common/CommonConstants"
+//This Class is used for rendering Login Page
 class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: EMPTY,
+      username: EMPTY
     }
   }
 
-  // To handle user tries to login
+  // To handle user tries to login when clicking submit btn
   handleSubmit = () => {
     this.props.username(this.state.username)
     this.props.history.push(HOMEPATH)
   }
-
-  handleUsername = (event) => {
+  //used to handle username in the textfield
+  handleUsername = (event) =>
     this.setState({
       username: event.target.value,
     })
-  }
 
   render() {
     return (
       <div className="mainDiv">
         <IconButton color="inherit" aria-label="open drawer">
           <InstagramIcon className="LoginLogoIcon" />
-        </IconButton>
-        <br />
+        </IconButton>  <br />
         <TextField
           id="standard-basic"
           label="Username"
-          onChange={this.handleUsername}
-        />
-        <br />
+          onChange={this.handleUsername} /> <br />
         <TextField id="standard-search" label="Password" type="password" />
         <br />
         <Button
@@ -46,8 +43,7 @@ class Login extends Component {
           type="submit"
           className="loginBtn"
           variant="outlined"
-          color="primary"
-        >
+          color="primary">
           {LOGIN}
         </Button>
       </div>
@@ -57,6 +53,7 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    //dispatching username to set the data to store
     username: (data) => dispatch(username(data)),
   }
 }

@@ -18,7 +18,7 @@ import { connect } from "react-redux"
 import "./Home.css"
 import { savedList } from "../../action/commonAction"
 import AppHeader from "../../Components/AppHeader/AppHeader"
-import { SAVEPAGE, SAVEPATH } from "../../Common/CommonConstants"
+import { LIKED, SAVEPAGE, SAVEPATH } from "../../Common/CommonConstants"
 
 let savedListArray = []
 export class Home extends Component {
@@ -32,14 +32,13 @@ export class Home extends Component {
       liked: false,
     }
   }
-
-  handleLike = (index, item, event) => {
+  //used to handling like feature functionality
+  handleLike = (index, item) => {
     item.likedStatus = !item.likedStatus
-    // Toggle the state variable liked
     this.setState({ liked: !item.likedStatus })
   }
-
-  handleSave = (index, item, event) => {
+  //used to handling saved items feature functinality
+  handleSave = (index, item) => {
     item.savedStatus = !item.savedStatus
     this.setState({ liked: !item.savedStatus })
     if (item.savedStatus) {
@@ -59,35 +58,28 @@ export class Home extends Component {
       })
     }
   }
-
+  //used to render like feature in the card
   likeRender = (event, index, item) => {
     return (
       <IconButton
         onClick={this.handleLike.bind(this, index, item)}
-        aria-label="add to favorites"
-      >
+        aria-label="add to favorites" >
         {item.likedStatus === true ? (
           <>
-            <Typography>1 like</Typography>
+            <Typography>{LIKED}</Typography>
             <FavoriteIcon style={{ color: "red" }} />
           </>
-        ) : (
-          <FavoriteBorderIcon />
-        )}
+        ) : <FavoriteBorderIcon />}
       </IconButton>
     )
   }
-
+  //used to render save feature in the card
   saveRender = (event, index, item) => {
-
-
     return (
       <IconButton aria-label="save" onClick={this.handleSave.bind(this, index, item)}>
         {item.savedStatus === true ? (
           <BookmarkIcon />
-        ) : (
-          <BookmarkBorderIcon />
-        )}
+        ) : <BookmarkBorderIcon />}
       </IconButton>
     )
   }
@@ -101,32 +93,24 @@ export class Home extends Component {
             return (
               <Card className="root" key={item.id}>
                 <CardHeader avatar={
-                  <Avatar aria-label="recipe" >
-                    {item.avatar}
-                  </Avatar>
-                }
+                  <Avatar aria-label="recipe" > {item.avatar}</Avatar>}
                   title={item.title}
-                  subheader="September 14, 2016"
-                />
+                  subheader="September 14, 2016" />
                 <CardMedia
                   className="media"
                   image={item.image}
-                  title="Paella dish"
-                />
+                  title="Paella dish" />
                 <CardContent>
                   <Typography
                     variant="body2"
                     color="textSecondary"
-                    component="p"
-                  >
+                    component="p" >
                     {item.description}
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
                   {this.likeRender(this, index, item)}
-                  <IconButton aria-label="share" disabled>
-                    <ShareIcon />
-                  </IconButton>
+                  <IconButton aria-label="share" style={{ cursor: 'not-allowed' }} > <ShareIcon /></IconButton>
                   {this.saveRender(this, index, item)}
                 </CardActions>
               </Card>
@@ -136,23 +120,22 @@ export class Home extends Component {
       </div>
     )
   }
-
+  //used to send the data to saveditems page when current page ends 
   componentWillUnmount() {
     this.props.savedList(savedListArray)
   }
 }
 
-
-
 const mapStateToProps = (state) => {
   return {
+    //getting username while login from store
     username: state.common.username,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    //dispatching saved to set the data to store
     savedList: (data) => dispatch(savedList(data)),
   }
 }

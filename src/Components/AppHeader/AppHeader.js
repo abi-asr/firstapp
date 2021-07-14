@@ -26,7 +26,9 @@ import {
     HOMEPATH,
     INSTAGRAM,
     LOGOUT,
+    MESSAGE,
     MESSAGE_INFO,
+    NOTIFICATION,
     NOTIFICATION_INFO,
     PROFILE,
     PROFILE_INFO,
@@ -39,6 +41,7 @@ import ModalComponent from "../../Components/Modal/ModalComponent"
 let modalMessage = EMPTY,
     modalImage = EMPTY,
     modalPage = EMPTY
+//This Class is used for showing Header bar to the pages 
 class AppHeader extends Component {
     constructor(props) {
         super(props)
@@ -51,17 +54,18 @@ class AppHeader extends Component {
         }
     }
 
+    //used to open the menu items to display profile, logout..
     handleDialogOpen = () =>
         this.setState({
             dialogOpen: true,
             anchorEl: null,
         })
-
+    //used to open popover for logout
     openPopOver = (event) =>
         this.setState({
             anchorEl: event.currentTarget,
         })
-
+    //used to close popover for logout
     popOverClose = () => {
         this.setState({
             anchorEl: null,
@@ -69,44 +73,34 @@ class AppHeader extends Component {
         this.state.dialogOpen = false
         this.state.modalOpen = false
     }
-
-    handleLike = (index, item, event) => {
-        item.likedStatus = !item.likedStatus
-        // Toggle the state variable liked
-        this.setState({ liked: !item.likedStatus })
-    }
-
+    //used to open profile modal
     handleProfile = () => {
         this.setState({ modalOpen: true })
         modalMessage = PROFILE_INFO
         modalImage = celebrate
-        modalPage = "profile"
+        modalPage = PROFILE
     }
-
+    //used to open notification modal
     handleNotificationIcon = () => {
         this.setState({ modalOpen: true })
         modalMessage = NOTIFICATION_INFO
         modalImage = pageUnderConstruction
-        modalPage = "notification"
+        modalPage = NOTIFICATION
     }
-
+    //used to open messgae modal
     handleMessageIcon = () => {
         this.setState({ modalOpen: true })
         modalMessage = MESSAGE_INFO
         modalImage = messagePageConstruction
-        modalPage = "message"
+        modalPage = MESSAGE
     }
-
-
-    updateModalState = (modalOpenFromChild) => {
-        this.setState({ modalOpen: modalOpenFromChild })
-    }
-
-    handleUpdatePopoverState = (dialogOpenFromChild) => {
-        this.setState({ dialogOpen: dialogOpenFromChild })
-    }
-
+    //used to update modal state to false from child
+    updateModalState = (modalOpenFromChild) => this.setState({ modalOpen: modalOpenFromChild })
+    //used to update popover state to false from child
+    handleUpdatePopoverState = (dialogOpenFromChild) => this.setState({ dialogOpen: dialogOpenFromChild })
+    //used to handle saved items from menu list
     handleSavedItems = () => this.props.history.push(SAVEPATH)
+    //used to handle Home from menu list
     handleHome = () => this.props.history.push(HOMEPATH)
 
     render() {
@@ -116,17 +110,11 @@ class AppHeader extends Component {
                     <AppBar position="fixed">
                         <Toolbar>
                             <IconButton edge="start" color="inherit" aria-label="open drawer">
-                                <a target="_blank" href="https://about.instagram.com/">
-                                    <InstagramIcon />
-                                </a>
+                                <a target="_blank" href="https://about.instagram.com/"> <InstagramIcon /> </a>
                             </IconButton>
-                            <Typography variant="h6" noWrap>
-                                {INSTAGRAM}
-                            </Typography>
+                            <Typography variant="h6" noWrap>  {INSTAGRAM} </Typography>
                             <div className="seachField">
-                                <div className="seachIcon">
-                                    <SearchIcon />
-                                </div>
+                                <div className="seachIcon"> <SearchIcon />  </div>
                                 <InputBase
                                     className="seachInput"
                                     placeholder="Search…"
@@ -140,18 +128,14 @@ class AppHeader extends Component {
                                     color="inherit"
                                     onClick={this.handleMessageIcon}
                                 >
-                                    <Badge badgeContent={4} color="secondary">
-                                        <MailIcon />
-                                    </Badge>
+                                    <Badge badgeContent={5} color="secondary"> <MailIcon />  </Badge>
                                 </IconButton>
                                 <IconButton
                                     aria-label="show 17 new notifications"
                                     color="inherit"
                                     onClick={this.handleNotificationIcon}
                                 >
-                                    <Badge badgeContent={17} color="secondary">
-                                        <NotificationsIcon />
-                                    </Badge>
+                                    <Badge badgeContent={7} color="secondary"><NotificationsIcon /> </Badge>
                                 </IconButton>
                                 <Button
                                     className="AccountIcon"
@@ -160,8 +144,7 @@ class AppHeader extends Component {
                                     aria-label="account of current user"
                                     aria-haspopup="true"
                                     color="inherit"
-                                    onClick={this.openPopOver}
-                                >
+                                    onClick={this.openPopOver} >
                                     <AccountCircle />
                                 </Button>
                                 <Menu
@@ -177,8 +160,7 @@ class AppHeader extends Component {
                                     transformOrigin={{
                                         vertical: "top",
                                         horizontal: "right",
-                                    }}
-                                >
+                                    }} >
                                     <MenuItem onClick={this.handleProfile}>{PROFILE}</MenuItem>
                                     <MenuItem onClick={this.handleDialogOpen}>{LOGOUT}</MenuItem>
                                     {this.props.page === HOMEPAGE ? <MenuItem onClick={this.handleHome}>
@@ -192,9 +174,7 @@ class AppHeader extends Component {
                                         dialogOpen={this.state.dialogOpen}
                                         updatePopOverState={this.handleUpdatePopoverState}
                                     />
-                                ) : (
-                                    EMPTY
-                                )}
+                                ) : EMPTY}
                                 {this.state.modalOpen ? (
                                     <ModalComponent
                                         modalOpen={this.state.modalOpen}
@@ -203,9 +183,7 @@ class AppHeader extends Component {
                                         image={modalImage}
                                         updateModalState={this.updateModalState}
                                     />
-                                ) : (
-                                    EMPTY
-                                )}
+                                ) : EMPTY}
                             </div>
                         </Toolbar>
                     </AppBar>
@@ -217,6 +195,7 @@ class AppHeader extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        //getting username while login from store
         username: state.common.username,
     }
 }

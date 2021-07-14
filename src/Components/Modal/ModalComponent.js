@@ -6,17 +6,17 @@ import CardMedia from "@material-ui/core/CardMedia"
 import CardContent from "@material-ui/core/CardContent"
 import { connect } from "react-redux"
 import Typography from "@material-ui/core/Typography"
-import { EMPTY } from "../../Common/CommonConstants"
+import { EMPTY, EXCLAMATION, PROFILE, WELCOME } from "../../Common/CommonConstants"
 
+//This Class is used for showing Modal to the pages 
 class ModalComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalOpen: this.props.modalOpen,
+      modalOpen: this.props.modalOpen
     }
   }
-
-
+  //used to render modal body content
   bodyRender = () => {
     return (
       <div className="modalStyle">
@@ -24,16 +24,14 @@ class ModalComponent extends Component {
           <CardMedia
             className="mediaModal"
             image={this.props.image}
-            title="Modal Image"
-          />
+            title="Modal Image" />
           <CardContent>
             <Typography
               className="profileInfoText"
               variant="body2"
               color="textSecondary"
-              component="p"
-            >
-              {this.props.page === "profile" ? <div>Welcome {this.props.username} !</div> : EMPTY}
+              component="p" >
+              {this.props.page === PROFILE ? <div>{WELCOME}{this.props.username}{EXCLAMATION}</div> : EMPTY}
               {this.props.message}
             </Typography>
           </CardContent>
@@ -41,14 +39,13 @@ class ModalComponent extends Component {
       </div>
     )
   }
-
+  //used to handle closing the modal 
   handleClose = () => {
     this.setState({
       modalOpen: false,
     })
     this.props.updateModalState(!this.state.modalOpen)
   }
-
 
   render() {
     return (
@@ -65,9 +62,11 @@ class ModalComponent extends Component {
     )
   }
 }
+
 const mapStateToProps = (state) => {
   return {
-    username: state.common.username,
+    //getting username while login from store
+    username: state.common.username
   }
 }
 
