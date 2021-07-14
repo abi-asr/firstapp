@@ -1,0 +1,45 @@
+.MuiSvgIcon-root {
+    width: 20px;
+    height: 20px;
+    color: black;
+  }
+  .MuiTypography-noWrap {
+    color: black;
+  }
+  
+  .MuiAppBar-colorPrimary {
+    color: #fff;
+    background-color: #fafafa !important;
+  }
+  
+  .MuiToolbar-regular {
+    min-height: 60px !important;
+  }
+
+  .seachField {
+    margin-left: 10%;
+    display: inline-flex;
+    background-color: #ffffff;
+  }
+  
+  .AccountIcon {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+  }
+
+  .headerLeftIcons{
+    margin-left: 35%;
+  }
+
+.seachIcon{
+    margin-top: 5px;
+  }
+  
+  .seachInput{
+    margin-left: 5px;
+  }
+  
+  .headerDiv{
+    height: 50px;
+  }

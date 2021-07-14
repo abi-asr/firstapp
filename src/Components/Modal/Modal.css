@@ -1,0 +1,28 @@
+.modalStyle{
+    left: 32%;
+    top:30%;
+    height: 250px;
+    position: absolute;
+    width: 380px;
+    background-color: white;
+    /* background-image: url('../assets/celebrateBg.jpg'); */
+}
+
+.mediaModal{
+    height: 100px;
+    width:100px;
+}
+
+.rootModalCard{
+    margin-left: 90px !important;
+    margin-right: 100px !important;
+    margin-top: 40px !important;
+    height: 165px;
+    width: 217px;
+    box-shadow: none !important;
+}
+
+.profileInfoText{
+    font-family: cursive !important;
+    font-weight: 600 !important;
+}

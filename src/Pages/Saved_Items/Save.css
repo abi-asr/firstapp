@@ -1,0 +1,15 @@
+.rootSave {
+    max-width: 250px;
+    margin-top: 5%;
+    margin-left: 2%;
+  }
+
+  .newsFeedSaveBody{
+    height:595px;
+    margin-top: 10px;
+    display: flex;
+  }
+
+  .noSavedItemsDiv{
+    margin-top: 25%;;
+  }

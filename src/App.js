@@ -1,7 +1,7 @@
 import './App.css';
-import Login from './Pages/Login'
-import Home from './Pages/Home'
-import Save from './Pages/Save'
+import Login from './Pages/LOGIN/Login'
+import Home from './Pages/Home/Home'
+import Save from './Pages/Saved_Items/Save'
 
 import {
   BrowserRouter as Router,
@@ -14,6 +14,9 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
           <Route exact path="/login">
             <Login />
           </Route>

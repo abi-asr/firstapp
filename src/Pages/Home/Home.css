@@ -1,0 +1,15 @@
+.root {
+  max-width: 417px;
+  margin-top: 5%;
+  margin-left: 30%;
+}
+
+.media {
+  height: 100px;
+  padding-top: 56.25%   ;
+}
+
+.newsFeedBody{
+  height:595px;
+  margin-top: 10px;
+}
