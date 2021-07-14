@@ -38,7 +38,7 @@ export class Home extends Component {
     this.setState({ liked: !item.likedStatus })
   }
   //used to handling saved items feature functinality
-  handleSave = (index, item) => {
+  handleSave = (item) => {
     item.savedStatus = !item.savedStatus
     this.setState({ liked: !item.savedStatus })
     if (item.savedStatus) {
@@ -64,7 +64,7 @@ export class Home extends Component {
       <IconButton
         onClick={this.handleLike.bind(this, index, item)}
         aria-label="add to favorites" >
-        {item.likedStatus === true ? (
+        {item.likedStatus ? (
           <>
             <Typography>{LIKED}</Typography>
             <FavoriteIcon style={{ color: "red" }} />
@@ -74,10 +74,10 @@ export class Home extends Component {
     )
   }
   //used to render save feature in the card
-  saveRender = (event, index, item) => {
+  saveRender = (item) => {
     return (
-      <IconButton aria-label="save" onClick={this.handleSave.bind(this, index, item)}>
-        {item.savedStatus === true ? (
+      <IconButton aria-label="save" onClick={this.handleSave.bind(this, item)}>
+        {item.savedStatus  ? (
           <BookmarkIcon />
         ) : <BookmarkBorderIcon />}
       </IconButton>
@@ -111,7 +111,7 @@ export class Home extends Component {
                 <CardActions disableSpacing>
                   {this.likeRender(this, index, item)}
                   <IconButton aria-label="share" style={{ cursor: 'not-allowed' }} > <ShareIcon /></IconButton>
-                  {this.saveRender(this, index, item)}
+                  {this.saveRender(item)}
                 </CardActions>
               </Card>
             )
