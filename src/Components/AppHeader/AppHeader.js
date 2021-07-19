@@ -1,21 +1,18 @@
 import React, { Component } from 'react'
-import './AppHeader.css'
+import { withRouter } from "react-router-dom"
+import { connect } from "react-redux"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
 import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
-import InputBase from "@material-ui/core/InputBase"
 import Badge from "@material-ui/core/Badge"
 import InstagramIcon from "@material-ui/icons/Instagram"
-import SearchIcon from "@material-ui/icons/Search"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import MailIcon from "@material-ui/icons/Mail"
 import Button from "@material-ui/core/Button"
 import NotificationsIcon from "@material-ui/icons/Notifications"
-import { withRouter } from "react-router-dom"
-import { connect } from "react-redux"
 import celebrate from "../../assets/celebrate.png"
 import pageUnderConstruction from "../../assets/pageUnderConstruction.jpg"
 import messagePageConstruction from "../../assets/messagePageConstruction.jpg"
@@ -37,6 +34,7 @@ import {
 } from "../../Common/CommonConstants"
 import Popover from "../../Components/Popover/Popover"
 import ModalComponent from "../../Components/Modal/ModalComponent"
+import './AppHeader.css'
 
 let modalMessage = EMPTY,
     modalImage = EMPTY,
@@ -69,9 +67,9 @@ class AppHeader extends Component {
     popOverClose = () => {
         this.setState({
             anchorEl: null,
+            dialogOpen:false,
+            modalOpen:false
         })
-        this.state.dialogOpen = false
-        this.state.modalOpen = false
     }
     //used to open profile modal
     handleProfile = () => {
@@ -110,17 +108,9 @@ class AppHeader extends Component {
                     <AppBar position="fixed">
                         <Toolbar>
                             <IconButton edge="start" color="inherit" aria-label="open drawer">
-                                <a target="_blank" href="https://about.instagram.com/"> <InstagramIcon /> </a>
+                                <a target="_blank" rel="noreferrer" href="https://about.instagram.com/"> <InstagramIcon /> </a>
                             </IconButton>
                             <Typography variant="h6" noWrap>  {INSTAGRAM} </Typography>
-                            <div className="seachField">
-                                <div className="seachIcon"> <SearchIcon />  </div>
-                                <InputBase
-                                    className="seachInput"
-                                    placeholder="Search…"
-                                    inputProps={{ "aria-label": "search" }}
-                                />
-                            </div>
                             <div />
                             <div className="headerLeftIcons">
                                 <IconButton

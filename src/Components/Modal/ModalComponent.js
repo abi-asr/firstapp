@@ -1,10 +1,10 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
 import "./Modal.css"
 import Modal from "@material-ui/core/Modal"
 import Card from "@material-ui/core/Card"
 import CardMedia from "@material-ui/core/CardMedia"
 import CardContent from "@material-ui/core/CardContent"
-import { connect } from "react-redux"
 import Typography from "@material-ui/core/Typography"
 import { EMPTY, EXCLAMATION, PROFILE, WELCOME } from "../../Common/CommonConstants"
 
@@ -28,9 +28,9 @@ class ModalComponent extends Component {
           <CardContent>
             <Typography
               className="profileInfoText"
-              variant="body2"
+              component="span"
               color="textSecondary"
-              component="p" >
+               >
               {this.props.page === PROFILE ? <div>{WELCOME}{this.props.username}{EXCLAMATION}</div> : EMPTY}
               {this.props.message}
             </Typography>

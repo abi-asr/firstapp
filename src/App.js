@@ -1,18 +1,18 @@
 import './App.css';
-import Login from './Pages/LOGIN/Login'
-import Home from './Pages/Home/Home'
-import Save from './Pages/Saved_Items/Save'
-
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+import Login from './Pages/LOGIN/Login'
+import Home from './Pages/Home/Home'
+import Save from './Pages/Saved_Items/Save'
+ 
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router> 
         <Switch>
           <Route exact path="/">
             <Login />

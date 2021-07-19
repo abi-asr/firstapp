@@ -1,4 +1,6 @@
 import React, { Component } from "react"
+import { withRouter } from "react-router-dom"
+import { connect } from "react-redux"
 import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
 import Card from "@material-ui/core/Card"
@@ -13,8 +15,6 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder"
 import BookmarkIcon from "@material-ui/icons/Bookmark"
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
 import { newsFeedList } from "../../Common/jsonUtil"
-import { withRouter } from "react-router-dom"
-import { connect } from "react-redux"
 import "./Home.css"
 import { savedList } from "../../action/commonAction"
 import AppHeader from "../../Components/AppHeader/AppHeader"
@@ -55,6 +55,7 @@ export class Home extends Component {
       savedListArray.map((listItem, index) => {
         if (listItem.id === item.id)
           savedListArray.splice(index, 1)
+        return null
       })
     }
   }
@@ -77,7 +78,7 @@ export class Home extends Component {
   saveRender = (item) => {
     return (
       <IconButton aria-label="save" onClick={this.handleSave.bind(this, item)}>
-        {item.savedStatus  ? (
+        {item.savedStatus ? (
           <BookmarkIcon />
         ) : <BookmarkBorderIcon />}
       </IconButton>
@@ -99,12 +100,12 @@ export class Home extends Component {
                 <CardMedia
                   className="media"
                   image={item.image}
-                  title="Paella dish" />
+                  title={item.title} />
                 <CardContent>
                   <Typography
-                    variant="body2"
+                    component="span"
                     color="textSecondary"
-                    component="p" >
+                  >
                     {item.description}
                   </Typography>
                 </CardContent>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux"
 import AppHeader from '../../Components/AppHeader/AppHeader'
 import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
@@ -11,9 +12,10 @@ import Avatar from "@material-ui/core/Avatar"
 import ShareIcon from "@material-ui/icons/Share"
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder"
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
-import { connect } from "react-redux"
+import BookmarkIcon from "@material-ui/icons/Bookmark"
+import FavoriteIcon from "@material-ui/icons/Favorite"
 import './Save.css'
-import { HOMEPAGE, HOMEPATH, NO_SAVED_ITEMS } from '../../Common/CommonConstants'
+import { HOMEPAGE, HOMEPATH, NO_SAVED_ITEMS, LIKED } from '../../Common/CommonConstants'
 
 //This Class is used to rendering saved items
 class Save extends Component {
@@ -23,11 +25,11 @@ class Save extends Component {
             <div>
                 <AppHeader page={HOMEPAGE} path={HOMEPATH} />
                 {this.props.newsfeedSavedList &&
-                    this.props.newsfeedSavedList.length === 0 ? <div className="noSavedItemsDiv">{NO_SAVED_ITEMS}</div>
-                    : <div className="newsFeedSaveBody">
-                        {this.props.newsfeedSavedList.map((item, index) => {
+                    this.props.newsfeedSavedList.length
+                    ? <div className="newsFeedSaveBody">
+                        {this.props.newsfeedSavedList.map((item) => {
                             return (
-                                <Card className="rootSave">
+                                <Card className="rootSave" key={item.id}>
                                     <CardHeader avatar={
                                         <Avatar aria-label="recipe" className="avatar">
                                             {item.avatar}
@@ -39,25 +41,37 @@ class Save extends Component {
                                     <CardMedia
                                         className="media"
                                         image={item.image}
-                                        title="Paella dish"
+                                        title={item.title}
                                     />
                                     <CardContent>
                                         <Typography
                                             variant="body2"
                                             color="textSecondary"
-                                            component="p" F  >
+                                            component="p"  >
                                             {item.description}
                                         </Typography>
                                     </CardContent>
                                     <CardActions disableSpacing>
-                                        <IconButton aria-label="share"><FavoriteBorderIcon /> </IconButton>
+                                        <IconButton aria-label="like">
+                                            {item.likedStatus ? (
+                                                <>
+                                                    <Typography>{LIKED}</Typography>
+                                                    <FavoriteIcon style={{ color: "red" }} />
+                                                </>
+                                            ) : <FavoriteBorderIcon />}
+                                        </IconButton>
                                         <IconButton aria-label="share" disabled>   <ShareIcon /> </IconButton>
-                                        <IconButton aria-label="save">    <BookmarkBorderIcon /> </IconButton>
+                                        <IconButton aria-label="save">
+                                            {item.savedStatus ? (
+                                                <BookmarkIcon />
+                                            ) : <BookmarkBorderIcon />}
+                                        </IconButton>
                                     </CardActions>
                                 </Card>
                             )
                         })}
-                    </div>}
+                    </div>
+                    : <div className="noSavedItemsDiv">{NO_SAVED_ITEMS}</div>}
             </div>
         )
     }
