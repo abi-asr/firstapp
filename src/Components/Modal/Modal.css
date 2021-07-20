@@ -5,8 +5,18 @@
     position: absolute;
     width: 380px;
     background-color: white;
-    /* background-image: url('../assets/celebrateBg.jpg'); */
 }
+
+@media screen and (max-width: 645px) {
+    .modalStyle {
+        left: 18%;
+        top: 30%;
+        height: 250px;
+        position: absolute;
+        width: 308px;
+        background-color: white;
+    }
+  }
 
 .mediaModal{
     height: 100px;

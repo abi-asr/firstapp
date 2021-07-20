@@ -1,10 +1,10 @@
-import food from "../../src/assets/food.jpg"
-import space from "../../src/assets/space.jpg"
-import travel from "../../src/assets/travel.jpg"
-import nature from "../../src/assets/nature.jpg"
+import food from "../../src/assets/food.jpg";
+import space from "../../src/assets/space.jpg";
+import travel from "../../src/assets/travel.jpg";
+import nature from "../../src/assets/nature.jpg";
 
-export const newsFeedList =
-  [{
+export const newsFeedList = [
+  {
     id: 1,
     title: "Shrimp and Chorizo Paella",
     avatar: "S",
@@ -41,4 +41,4 @@ export const newsFeedList =
     likedStatus: false,
     savedStatus: false
   }
-  ]
+]

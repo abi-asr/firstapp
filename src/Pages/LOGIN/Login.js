@@ -13,7 +13,7 @@ class Login extends Component {
     this.state = {
       username: EMPTY
     }
-  }
+  } 
 
   // To handle user tries to login when clicking submit btn
   handleSubmit = () => {

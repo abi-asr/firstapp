@@ -19,7 +19,7 @@ class ModalComponent extends Component {
   //used to render modal body content
   bodyRender = () => {
     return (
-      <div className="modalStyle">
+      <div className="modalStyle"  >
         <Card className="rootModalCard">
           <CardMedia
             className="mediaModal"
@@ -28,9 +28,9 @@ class ModalComponent extends Component {
           <CardContent>
             <Typography
               className="profileInfoText"
-              component="span"
+              variant="body2"
               color="textSecondary"
-               >
+              component="p" >
               {this.props.page === PROFILE ? <div>{WELCOME}{this.props.username}{EXCLAMATION}</div> : EMPTY}
               {this.props.message}
             </Typography>

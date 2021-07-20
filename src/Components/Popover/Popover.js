@@ -1,11 +1,11 @@
 import React, { Component } from "react"
-import { withRouter } from "react-router-dom"
-import { connect } from "react-redux"
 import Dialog from "@material-ui/core/Dialog"
 import DialogActions from "@material-ui/core/DialogActions"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import Button from "@material-ui/core/Button"
+import { withRouter } from "react-router-dom"
 import { CANCEL, OK, LOGOUT_INFO, LOGIN_PATH, EXCLAMATION, HEY } from "../../Common/CommonConstants"
+import { connect } from "react-redux"
 
 class Popover extends Component {
   constructor(props) {

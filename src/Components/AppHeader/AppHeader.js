@@ -70,6 +70,7 @@ class AppHeader extends Component {
             dialogOpen:false,
             modalOpen:false
         })
+        
     }
     //used to open profile modal
     handleProfile = () => {

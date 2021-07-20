@@ -33,7 +33,7 @@ export class Home extends Component {
     }
   }
   //used to handling like feature functionality
-  handleLike = (index, item) => {
+  handleLike = (item) => {
     item.likedStatus = !item.likedStatus
     this.setState({ liked: !item.likedStatus })
   }
@@ -60,10 +60,10 @@ export class Home extends Component {
     }
   }
   //used to render like feature in the card
-  likeRender = (event, index, item) => {
+  likeRender = (item) => {
     return (
       <IconButton
-        onClick={this.handleLike.bind(this, index, item)}
+        onClick={this.handleLike.bind(this, item)}
         aria-label="add to favorites" >
         {item.likedStatus ? (
           <>
@@ -78,7 +78,7 @@ export class Home extends Component {
   saveRender = (item) => {
     return (
       <IconButton aria-label="save" onClick={this.handleSave.bind(this, item)}>
-        {item.savedStatus ? (
+        {item.savedStatus  ? (
           <BookmarkIcon />
         ) : <BookmarkBorderIcon />}
       </IconButton>
@@ -90,7 +90,7 @@ export class Home extends Component {
       <div>
         <AppHeader page={SAVEPAGE} path={SAVEPATH} />
         <div className="newsFeedBody">
-          {newsFeedList.map((item, index) => {
+          {newsFeedList.map((item) => {
             return (
               <Card className="root" key={item.id}>
                 <CardHeader avatar={
@@ -103,14 +103,13 @@ export class Home extends Component {
                   title={item.title} />
                 <CardContent>
                   <Typography
-                    component="span"
-                    color="textSecondary"
-                  >
+                    variant="body2"
+                    color="textSecondary">
                     {item.description}
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                  {this.likeRender(this, index, item)}
+                  {this.likeRender(item)}
                   <IconButton aria-label="share" style={{ cursor: 'not-allowed' }} > <ShareIcon /></IconButton>
                   {this.saveRender(item)}
                 </CardActions>
