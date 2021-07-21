@@ -7,6 +7,7 @@ import {
 import Login from './Pages/LOGIN/Login'
 import Home from './Pages/Home/Home'
 import Save from './Pages/Saved_Items/Save'
+import Profile from './Pages/Profile/Profile';
  
 
 function App() {
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/savedItems">
             <Save />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
         </Switch>
       </Router>

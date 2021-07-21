@@ -53,7 +53,7 @@ export class Home extends Component {
     }
     else {
       savedListArray.map((listItem, index) => {
-        if (listItem.id === item.id)
+        if (listItem.title === item.title)
           savedListArray.splice(index, 1)
         return null
       })

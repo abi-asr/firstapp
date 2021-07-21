@@ -77,10 +77,11 @@ class AppHeader extends Component {
     }
     //used to open profile modal
     handleProfile = () => {
-        this.setState({ modalOpen: true })
-        modalMessage = PROFILE_INFO
-        modalImage = celebrate
-        modalPage = PROFILE
+        this.props.history.push('/profile')
+        // this.setState({ modalOpen: true })
+        // modalMessage = PROFILE_INFO
+        // modalImage = celebrate
+        // modalPage = PROFILE
     }
     //used to open notification modal
     handleNotificationIcon = () => {

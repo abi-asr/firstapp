@@ -1,0 +1,28 @@
+.rootProfile {
+    width: 412px;
+    margin-top: 5%;
+  }
+  
+  .media {
+    height: 100px;
+    padding-top: 56.25%   ;
+  }
+  
+  .newsFeedProfileBody{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+  }
+  .postedByName{
+    float: left;
+    margin-left: 20px !important;
+    font-weight: 600 !important;
+    font-family: cursive !important;
+  }
+
+  .noProfileItemsDiv{
+    margin-top: 25%;;
+  }
+  
