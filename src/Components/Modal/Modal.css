@@ -1,6 +1,6 @@
-.modalStyle{
+.modalStyle {
     left: 32%;
-    top:30%;
+    top: 30%;
     height: 250px;
     position: absolute;
     width: 380px;
@@ -16,14 +16,34 @@
         width: 308px;
         background-color: white;
     }
-  }
-
-.mediaModal{
-    height: 100px;
-    width:100px;
 }
 
-.rootModalCard{
+.modalAddPostDiv {
+    margin-left: 20%;
+    margin-top: 2%;
+}
+
+.inputUpload {
+    display: none;
+}
+
+.uploadBtn{
+    top:8px;
+}
+
+.cameraBtn {
+    top: 16px;
+    right: 0px;
+    padding-right: 0px;
+    left: 0px;
+}
+
+.mediaModal {
+    height: 100px;
+    width: 100px;
+}
+
+.rootModalCard {
     margin-left: 90px !important;
     margin-right: 100px !important;
     margin-top: 40px !important;
@@ -32,7 +52,7 @@
     box-shadow: none !important;
 }
 
-.profileInfoText{
+.profileInfoText {
     font-family: cursive !important;
     font-weight: 600 !important;
 }

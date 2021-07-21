@@ -14,11 +14,10 @@ import ShareIcon from "@material-ui/icons/Share"
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder"
 import BookmarkIcon from "@material-ui/icons/Bookmark"
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
-import { newsFeedList } from "../../Common/jsonUtil"
 import "./Home.css"
 import { savedList } from "../../action/commonAction"
 import AppHeader from "../../Components/AppHeader/AppHeader"
-import { LIKED, SAVEPAGE, SAVEPATH } from "../../Common/CommonConstants"
+import { LIKED, POSTED_BY, SAVEPAGE, SAVEPATH } from "../../Common/CommonConstants"
 
 let savedListArray = []
 export class Home extends Component {
@@ -29,9 +28,10 @@ export class Home extends Component {
       anchorEl: null,
       dialogOpen: false,
       modalOpen: false,
-      liked: false,
+      liked: false
     }
   }
+
   //used to handling like feature functionality
   handleLike = (item) => {
     item.likedStatus = !item.likedStatus
@@ -45,7 +45,7 @@ export class Home extends Component {
       if (savedListArray.length === 0)
         savedListArray.push(item)
       for (let i = 0; i < savedListArray.length; i++) {
-        if (item.id !== savedListArray[i].id) {
+        if (item.title !== savedListArray[i].title) {
           savedListArray.push(item)
           break;
         }
@@ -78,7 +78,7 @@ export class Home extends Component {
   saveRender = (item) => {
     return (
       <IconButton aria-label="save" onClick={this.handleSave.bind(this, item)}>
-        {item.savedStatus  ? (
+        {item.savedStatus ? (
           <BookmarkIcon />
         ) : <BookmarkBorderIcon />}
       </IconButton>
@@ -90,9 +90,9 @@ export class Home extends Component {
       <div>
         <AppHeader page={SAVEPAGE} path={SAVEPATH} />
         <div className="newsFeedBody">
-          {newsFeedList.map((item) => {
+          {this.props.newsFeedListData.map((item) => {
             return (
-              <Card className="root" key={item.id}>
+              <Card className="root" key={item.title}>
                 <CardHeader avatar={
                   <Avatar aria-label="recipe" > {item.avatar}</Avatar>}
                   title={item.title}
@@ -113,6 +113,12 @@ export class Home extends Component {
                   <IconButton aria-label="share" style={{ cursor: 'not-allowed' }} > <ShareIcon /></IconButton>
                   {this.saveRender(item)}
                 </CardActions>
+                <Typography
+                    variant="body2"
+                    className="postedByName"
+                    color="textSecondary">
+                    {POSTED_BY} {item.owner}
+                  </Typography>
               </Card>
             )
           })}
@@ -130,6 +136,7 @@ const mapStateToProps = (state) => {
   return {
     //getting username while login from store
     username: state.common.username,
+    newsFeedListData: state.common.newsfeedPostList
   }
 }
 

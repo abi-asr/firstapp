@@ -13,7 +13,7 @@ class Login extends Component {
     this.state = {
       username: EMPTY
     }
-  } 
+  }
 
   // To handle user tries to login when clicking submit btn
   handleSubmit = () => {
@@ -54,7 +54,7 @@ class Login extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     //dispatching username to set the data to store
-    username: (data) => dispatch(username(data)),
+    username: (data) => dispatch(username(data))
   }
 }
 

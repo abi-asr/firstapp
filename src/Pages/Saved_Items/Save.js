@@ -15,7 +15,7 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder"
 import BookmarkIcon from "@material-ui/icons/Bookmark"
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
 import './Save.css'
-import { HOMEPAGE, HOMEPATH, NO_SAVED_ITEMS, LIKED } from '../../Common/CommonConstants'
+import { HOMEPAGE, HOMEPATH, NO_SAVED_ITEMS, LIKED, POSTED_BY } from '../../Common/CommonConstants'
 
 //This Class is used to rendering saved items
 class Save extends Component {
@@ -28,7 +28,7 @@ class Save extends Component {
                     this.props.newsfeedSavedList.length ? <div className="newsFeedSaveBody">
                     {this.props.newsfeedSavedList.map((item) => {
                         return (
-                            <Card className="rootSave" key={item.id}>
+                            <Card className="rootSave" key={item.title}>
                                 <CardHeader avatar={
                                     <Avatar aria-label="recipe" className="avatar">
                                         {item.avatar}
@@ -61,6 +61,12 @@ class Save extends Component {
                                         <BookmarkIcon />
                                     ) : <BookmarkBorderIcon />} </IconButton>
                                 </CardActions>
+                                <Typography
+                                    variant="body2"
+                                    className="postedByName"
+                                    color="textSecondary">
+                                    {POSTED_BY} {item.owner}
+                                </Typography>
                             </Card>
                         )
                     })}

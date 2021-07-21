@@ -6,20 +6,110 @@ import Card from "@material-ui/core/Card"
 import CardMedia from "@material-ui/core/CardMedia"
 import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography"
-import { EMPTY, EXCLAMATION, PROFILE, WELCOME } from "../../Common/CommonConstants"
+import TextField from '@material-ui/core/TextField';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import IconButton from '@material-ui/core/IconButton';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import Button from '@material-ui/core/Button';
+import { newsFeedList } from "../../action/commonAction"
+import { ADD_POSTS, EMPTY, EXCLAMATION, POST, PROFILE, WELCOME } from "../../Common/CommonConstants"
 
+let myObj = {},
+newsFeedPostArrayList=[]
 //This Class is used for showing Modal to the pages 
 class ModalComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalOpen: this.props.modalOpen
+      modalOpen: this.props.modalOpen,
+      selectedFile: null,
+      selectedTitle: '',
+      selectedDescription: '',
+      selectedAvatarLetter: '',
+      filename: ''
     }
   }
+  // On file select (from the pop up)
+  onFileChange = event => {
+    if (event.target.files && event.target.files[0])
+      this.setState({
+        selectedFile: URL.createObjectURL(event.target.files[0]),
+        filename: event.target.files[0].name
+      });
+  }
+  // On title select from the modal
+  handleTitleChange = event => {
+    if (event.target.value)
+      this.setState({
+        selectedTitle: event.target.value
+      });
+  }
+  // On Description select from the modal
+  handleDescriptionChange = event => {
+    if (event.target.value)
+      this.setState({
+        selectedDescription: event.target.value
+      });
+  }
+  // On avatar letter select from the modal
+  handleAvatarLetterChange = event => {
+    if (event.target.value)
+      this.setState({
+        selectedAvatarLetter: event.target.value
+      });
+  }
+
+  // On file upload (click the upload button)
+  onFileUpload = () => {
+    myObj = {
+      id: this.props.increment,
+      title: this.state.selectedTitle,
+      owner: this.props.username,
+      avatar:this.state.selectedAvatarLetter,
+      description: this.state.selectedDescription,
+      image: this.state.selectedFile,
+      likedStatus: false,
+      savedStatus: false
+    }
+    this.setState({
+      selectedFile: myObj
+    })
+    newsFeedPostArrayList.push(myObj)
+    this.setState({
+      modalOpen: false
+    })
+    this.props.updateModalState(!this.state.modalOpen)
+    this.props.newsFeedList(myObj)
+  }
+
   //used to render modal body content
   bodyRender = () => {
-    return (
+    return (this.props.page === ADD_POSTS ?
       <div className="modalStyle"  >
+        <div className="modalAddPostDiv">
+          <TextField id="standard-basic" label="title" onChange={this.handleTitleChange} /><br />
+          <TextField id="standard-basic" label="description" onChange={this.handleDescriptionChange} /><br />
+          {this.state.filename ? <TextField id="standard-basic" label="image" value={this.state.filename} />
+            : <TextField id="standard-basic" label="image" value={this.state.filename} />}
+          <input accept="image/*" className="inputUpload" id="icon-button-file" type="file" onChange={this.onFileChange} />
+          <label htmlFor="icon-button-file">
+            <IconButton className="cameraBtn" color="primary" aria-label="upload picture" component="span">
+              <PhotoCamera />
+            </IconButton>
+          </label>
+          <br />
+          <TextField id="standard-basic" label="avatar letter" onChange={this.handleAvatarLetterChange} /><br />
+          <Button
+            variant="contained"
+            color="default"
+            className="uploadBtn"
+            onClick={this.onFileUpload}
+            startIcon={<CloudUploadIcon />} >
+            {POST}
+          </Button>
+        </div>
+      </div>
+      : <div className="modalStyle"  >
         <Card className="rootModalCard">
           <CardMedia
             className="mediaModal"
@@ -42,7 +132,7 @@ class ModalComponent extends Component {
   //used to handle closing the modal 
   handleClose = () => {
     this.setState({
-      modalOpen: false,
+      modalOpen: false
     })
     this.props.updateModalState(!this.state.modalOpen)
   }
@@ -54,8 +144,7 @@ class ModalComponent extends Component {
           open={this.state.modalOpen}
           onClose={this.handleClose}
           aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
+          aria-describedby="simple-modal-description">
           {this.bodyRender()}
         </Modal>
       </div>
@@ -66,8 +155,16 @@ class ModalComponent extends Component {
 const mapStateToProps = (state) => {
   return {
     //getting username while login from store
-    username: state.common.username
+    username: state.common.username,
+    increment:state.common.increment
   }
 }
 
-export default connect(mapStateToProps, null)(ModalComponent)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    //dispatching saved to set the data to store
+    newsFeedList: (data) => dispatch(newsFeedList(data)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent)

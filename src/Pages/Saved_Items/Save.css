@@ -13,3 +13,10 @@
   .noSavedItemsDiv{
     margin-top: 25%;;
   }
+
+  .postedByName{
+    float: left;
+    margin-left: 20px !important;
+    font-weight: 600 !important;
+      font-family: cursive !important;
+  }

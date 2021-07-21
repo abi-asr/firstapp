@@ -13,10 +13,12 @@ import AccountCircle from "@material-ui/icons/AccountCircle"
 import MailIcon from "@material-ui/icons/Mail"
 import Button from "@material-ui/core/Button"
 import NotificationsIcon from "@material-ui/icons/Notifications"
+import AddBoxOutlinedIcon from '@material-ui/icons/AddBoxOutlined';
 import celebrate from "../../assets/celebrate.png"
 import pageUnderConstruction from "../../assets/pageUnderConstruction.jpg"
 import messagePageConstruction from "../../assets/messagePageConstruction.jpg"
 import {
+    ADD_POSTS,
     EMPTY,
     HOME,
     HOMEPAGE,
@@ -27,6 +29,7 @@ import {
     MESSAGE_INFO,
     NOTIFICATION,
     NOTIFICATION_INFO,
+    POST_INFO,
     PROFILE,
     PROFILE_INFO,
     SAVED_ITEMS,
@@ -67,10 +70,10 @@ class AppHeader extends Component {
     popOverClose = () => {
         this.setState({
             anchorEl: null,
-            dialogOpen:false,
-            modalOpen:false
+            dialogOpen: false,
+            modalOpen: false
         })
-        
+
     }
     //used to open profile modal
     handleProfile = () => {
@@ -92,6 +95,13 @@ class AppHeader extends Component {
         modalMessage = MESSAGE_INFO
         modalImage = messagePageConstruction
         modalPage = MESSAGE
+    }
+    //used to handle add posts to open the modal
+    handleAddPostsIcon = () => {
+        this.setState({ modalOpen: true })
+        modalMessage = POST_INFO
+        modalImage = messagePageConstruction
+        modalPage = ADD_POSTS
     }
     //used to update modal state to false from child
     updateModalState = (modalOpenFromChild) => this.setState({ modalOpen: modalOpenFromChild })
@@ -115,14 +125,21 @@ class AppHeader extends Component {
                             <div />
                             <div className="headerLeftIcons">
                                 <IconButton
-                                    aria-label="show 4 new mails"
+                                    aria-label="add posts"
+                                    color="inherit"
+                                    onClick={this.handleAddPostsIcon}
+                                >
+                                    <AddBoxOutlinedIcon />
+                                </IconButton>
+                                <IconButton
+                                    aria-label="show 5 new mails"
                                     color="inherit"
                                     onClick={this.handleMessageIcon}
                                 >
                                     <Badge badgeContent={5} color="secondary"> <MailIcon />  </Badge>
                                 </IconButton>
                                 <IconButton
-                                    aria-label="show 17 new notifications"
+                                    aria-label="show 7 new notifications"
                                     color="inherit"
                                     onClick={this.handleNotificationIcon}
                                 >

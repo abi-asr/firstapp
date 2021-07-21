@@ -1,5 +1,5 @@
 .root {
-  max-width: 417px;
+  width: 412px;
   margin-top: 5%;
 }
 
@@ -14,4 +14,10 @@
   flex-direction: column;
   align-items: center;
   padding: 2%;
+}
+.postedByName{
+  float: left;
+  margin-left: 20px !important;
+  font-weight: 600 !important;
+    font-family: cursive !important;
 }
