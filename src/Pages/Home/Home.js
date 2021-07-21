@@ -17,7 +17,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
 import "./Home.css"
 import { savedList } from "../../action/commonAction"
 import AppHeader from "../../Components/AppHeader/AppHeader"
-import { LIKED, POSTED_BY, SAVEPAGE, SAVEPATH } from "../../Common/CommonConstants"
+import { LIKED, NO_HOME_ITEMS, POSTED_BY, SAVEPAGE, SAVEPATH } from "../../Common/CommonConstants"
 
 let savedListArray = []
 export class Home extends Component {
@@ -89,6 +89,8 @@ export class Home extends Component {
     return (
       <div>
         <AppHeader page={SAVEPAGE} path={SAVEPATH} />
+        {this.props.newsFeedListData &&
+                    this.props.newsFeedListData.length ?
         <div className="newsFeedBody">
           {this.props.newsFeedListData.map((item) => {
             return (
@@ -122,7 +124,7 @@ export class Home extends Component {
               </Card>
             )
           })}
-        </div>
+        </div>:   <div className="noHomeItemsDiv">{NO_HOME_ITEMS}</div>}
       </div>
     )
   }
