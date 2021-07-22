@@ -23,6 +23,19 @@
   }
 
   .noProfileItemsDiv{
-    margin-top: 25%;;
+    margin-top: 25%;
   }
+
+  @media screen and (max-width: 645px) {
+   .noProfileItemsDiv {
+      margin-top: 60%;
+  }
+  .newsFeedProfileBody{
+    margin-top: 115px;
+
+  }
+}
+  
+
+
   

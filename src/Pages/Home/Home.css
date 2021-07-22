@@ -24,3 +24,14 @@
  .noHomeItemsDiv{
   margin-top: 25%;;
 }
+
+@media screen and (max-width: 645px) {
+  .noHomeItemsDiv {
+    margin-top: 60%;
+  }
+  .newsFeedBody{
+    margin-top: 115px;
+
+  }
+}
+

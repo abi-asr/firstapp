@@ -14,7 +14,6 @@ import MailIcon from "@material-ui/icons/Mail"
 import Button from "@material-ui/core/Button"
 import NotificationsIcon from "@material-ui/icons/Notifications"
 import AddBoxOutlinedIcon from '@material-ui/icons/AddBoxOutlined';
-import celebrate from "../../assets/celebrate.png"
 import pageUnderConstruction from "../../assets/pageUnderConstruction.jpg"
 import messagePageConstruction from "../../assets/messagePageConstruction.jpg"
 import {
@@ -31,7 +30,6 @@ import {
     NOTIFICATION_INFO,
     POST_INFO,
     PROFILE,
-    PROFILE_INFO,
     SAVED_ITEMS,
     SAVEPATH,
 } from "../../Common/CommonConstants"
@@ -78,10 +76,6 @@ class AppHeader extends Component {
     //used to open profile modal
     handleProfile = () => {
         this.props.history.push('/profile')
-        // this.setState({ modalOpen: true })
-        // modalMessage = PROFILE_INFO
-        // modalImage = celebrate
-        // modalPage = PROFILE
     }
     //used to open notification modal
     handleNotificationIcon = () => {

@@ -69,7 +69,7 @@ class Profile extends Component {
                                     </Typography>
                                 </Card>
                             )
-                        else return ""
+                        else return <div className="noProfileItemsDiv">{NO_PROFILE_ITEMS}</div>
                     })}
                 </div>
                     : <div className="noProfileItemsDiv">{NO_PROFILE_ITEMS}</div>

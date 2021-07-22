@@ -2,6 +2,7 @@
     max-width: 250px;
     margin-top: 5%;
     margin-left: 2%;
+    height: fit-content;
   }
 
   .newsFeedSaveBody{
@@ -20,3 +21,12 @@
     font-weight: 600 !important;
       font-family: cursive !important;
   }
+
+  @media screen and (max-width: 645px) {
+    .noSavedItemsDiv {
+       margin-top: 60%;
+   }
+   .newsFeedSaveBody{
+     margin-top: 115px;
+   }
+ }

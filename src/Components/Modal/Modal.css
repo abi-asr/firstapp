@@ -8,18 +8,26 @@
 }
 
 @media screen and (max-width: 645px) {
-    .modalStyle {
+    /* .modalStyle {
         left: 18%;
         top: 30%;
         height: 250px;
         position: absolute;
         width: 308px;
         background-color: white;
+    } */
+    .modalStyle {
+        left: 10%;
+        top: 30%;
+        height: 300px;
+        position: absolute;
+        width: 333px;
+        background-color: white;
     }
 }
 
 .modalAddPostDiv {
-    margin-left: 20%;
+    margin-left: 15%;
     margin-top: 2%;
 }
 
