@@ -20,6 +20,8 @@ export const PROFILEPAGE='ProfilePage'
 export const LOGIN_PATH='/login'
 export const HOMEPATH ='/home'
 export const SAVEPATH ='/savedItems'
+export const PROFILEPATH ='/profile'
+export const EMPTYPATH='/'
 export const EMPTY=''
 export const NO_SAVED_ITEMS='No Saved Items'
 export const NO_PROFILE_ITEMS='No posts are uploaded in your profile'
@@ -33,3 +35,7 @@ export const LIKED='1 likes'
 export const ADD_POSTS="Add Posts"
 export const POST_INFO="you can add you post here"
 export const POSTED_BY="Posted by "
+export const HOME_NAV='>Home'
+export const SAVE_NAV='>Saved Items'
+export const PROFILE_NAV='>Profile'
+

@@ -22,6 +22,7 @@ import {
     HOME,
     HOMEPAGE,
     HOMEPATH,
+    HOME_NAV,
     INSTAGRAM,
     LOGOUT,
     MESSAGE,
@@ -30,8 +31,13 @@ import {
     NOTIFICATION_INFO,
     POST_INFO,
     PROFILE,
+    PROFILEPAGE,
+    PROFILEPATH,
+    PROFILE_NAV,
     SAVED_ITEMS,
+    SAVEPAGE,
     SAVEPATH,
+    SAVE_NAV,
 } from "../../Common/CommonConstants"
 import Popover from "../../Components/Popover/Popover"
 import ModalComponent from "../../Components/Modal/ModalComponent"
@@ -75,7 +81,7 @@ class AppHeader extends Component {
     }
     //used to open profile modal
     handleProfile = () => {
-        this.props.history.push('/profile')
+        this.props.history.push(PROFILEPATH)
     }
     //used to open notification modal
     handleNotificationIcon = () => {
@@ -116,7 +122,13 @@ class AppHeader extends Component {
                             <IconButton edge="start" color="inherit" aria-label="open drawer">
                                 <a target="_blank" rel="noreferrer" href="https://about.instagram.com/"> <InstagramIcon /> </a>
                             </IconButton>
-                            <Typography variant="h6" noWrap>  {INSTAGRAM} </Typography>
+                            <Typography variant="body2" noWrap>  {INSTAGRAM} </Typography>
+                            {
+                                this.props.orgPage === HOMEPAGE ? <Typography variant="body2" noWrap>  {HOME_NAV} </Typography>
+                                    : this.props.orgPage === PROFILEPAGE ? <Typography variant="body2" noWrap>  {PROFILE_NAV} </Typography>
+                                        : this.props.orgPage === SAVEPAGE ? <Typography variant="body2" noWrap> {SAVE_NAV} </Typography>
+                                            : EMPTY
+                            }
                             <div />
                             <div className="headerLeftIcons">
                                 <IconButton

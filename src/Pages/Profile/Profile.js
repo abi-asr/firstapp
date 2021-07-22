@@ -16,7 +16,7 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder"
 import BookmarkIcon from "@material-ui/icons/Bookmark"
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
 import './Profile.css'
-import { HOMEPAGE, HOMEPATH, LIKED, POSTED_BY, NO_PROFILE_ITEMS } from '../../Common/CommonConstants'
+import { HOMEPAGE, HOMEPATH, LIKED, POSTED_BY, NO_PROFILE_ITEMS, PROFILEPAGE } from '../../Common/CommonConstants'
 import { withStyles } from '@material-ui/core/styles';
 import Badge from '@material-ui/core/Badge';
 
@@ -33,7 +33,7 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <AppHeader page={HOMEPAGE} path={HOMEPATH} />
+                <AppHeader page={HOMEPAGE} path={HOMEPATH} orgPage={PROFILEPAGE} />
                 {this.props.newsFeedListData &&
                     this.props.newsFeedListData.length ?
                     <div className="newsFeedProfileBody">
@@ -42,7 +42,7 @@ class Profile extends Component {
                                 dataAvailable = true
                                 return (<Card className="rootProfile" key={index}>
                                     <CardHeader avatar={
-                                        item.owner == this.props.username ?
+                                        item.owner === this.props.username ?
                                             <StyledBadge
                                                 overlap="circular"
                                                 anchorOrigin={{
@@ -89,6 +89,7 @@ class Profile extends Component {
                                     </Typography>
                                 </Card>)
                             }
+                            return null
                         })}
                         {!dataAvailable ? <div id="heloo" className="noProfileItemsDiv">{NO_PROFILE_ITEMS}</div> : ""}
                     </div>

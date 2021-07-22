@@ -17,7 +17,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
 import "./Home.css"
 import { savedList } from "../../action/commonAction"
 import AppHeader from "../../Components/AppHeader/AppHeader"
-import { LIKED, NO_HOME_ITEMS, POSTED_BY, SAVEPAGE, SAVEPATH } from "../../Common/CommonConstants"
+import { HOMEPAGE, LIKED, NO_HOME_ITEMS, POSTED_BY, SAVEPAGE, SAVEPATH } from "../../Common/CommonConstants"
 import { withStyles } from '@material-ui/core/styles';
 import Badge from '@material-ui/core/Badge';
 
@@ -97,7 +97,7 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <AppHeader page={SAVEPAGE} path={SAVEPATH}/>
+        <AppHeader page={SAVEPAGE} path={SAVEPATH} orgPage={HOMEPAGE}/>
         {this.props.newsFeedListData &&
           this.props.newsFeedListData.length ?
           <div className="newsFeedBody">
@@ -105,7 +105,7 @@ export class Home extends Component {
               return (
                 <Card className="root" key={item.title}>
                   <CardHeader avatar={
-                    item.owner == this.props.username ?
+                    item.owner === this.props.username ?
                       <StyledBadge
                         overlap="circular"
                         anchorOrigin={{
