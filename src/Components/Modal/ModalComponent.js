@@ -25,8 +25,9 @@ class ModalComponent extends Component {
       selectedFile: null,
       selectedTitle: '',
       selectedDescription: '',
-      selectedAvatarLetter: '',
-      filename: ''
+      selectedAvatarFile: '',
+      filename: '',
+      avatarFilename:''
     }
   }
   // On file select (from the pop up)
@@ -52,11 +53,12 @@ class ModalComponent extends Component {
       });
   }
   // On avatar letter select from the modal
-  handleAvatarLetterChange = event => {
-    if (event.target.value)
-      this.setState({
-        selectedAvatarLetter: event.target.value
-      });
+  handleAvatarChange = event => {
+    if (event.target.files && event.target.files[0])
+    this.setState({
+      selectedAvatarFile: URL.createObjectURL(event.target.files[0]),
+      avatarFilename: event.target.files[0].name
+    });
   }
 
   // On file upload (click the upload button)
@@ -65,7 +67,7 @@ class ModalComponent extends Component {
       id: this.props.increment,
       title: this.state.selectedTitle,
       owner: this.props.username,
-      avatar:this.state.selectedAvatarLetter,
+      avatar:this.state.selectedAvatarFile,
       description: this.state.selectedDescription,
       image: this.state.selectedFile,
       likedStatus: false,
@@ -89,16 +91,23 @@ class ModalComponent extends Component {
         <div className="modalAddPostDiv">
           <TextField id="standard-basic" label="title" onChange={this.handleTitleChange} /><br />
           <TextField id="standard-basic" label="description" onChange={this.handleDescriptionChange} /><br />
-          {this.state.filename ? <TextField id="standard-basic" label="image" value={this.state.filename} />
-            : <TextField id="standard-basic" label="image" value={this.state.filename} />}
-          <input accept="image/*" className="inputUpload" id="icon-button-file" type="file" onChange={this.onFileChange} />
-          <label htmlFor="icon-button-file">
-            <IconButton className="cameraBtn" color="primary" aria-label="upload picture" component="span">
+          {this.state.filename ? <TextField id="standard-basic" label="post image" value={this.state.filename} />
+            : <TextField id="standard-basic" label="post image" value={this.state.filename} />}
+          <input accept="image/*" className="inputUpload" id="icon-button-file post" type="file" onChange={this.onFileChange} />
+          <label htmlFor="icon-button-file post">
+            <IconButton className="cameraBtn" color="primary" aria-label="upload picture post" component="span">
               <PhotoCamera />
             </IconButton>
           </label>
           <br />
-          <TextField id="standard-basic" label="avatar letter" onChange={this.handleAvatarLetterChange} /><br />
+          {this.state.avatarFilename ? <TextField id="standard-basic" label="avatar image" value={this.state.avatarFilename} />
+            : <TextField id="standard-basic" label="avatar image" value={this.state.avatarFilename} />}
+          <input accept="image/*" className="inputUpload" id="icon-button-file" type="file" onChange={this.handleAvatarChange} />
+          <label htmlFor="icon-button-file">
+            <IconButton className="cameraBtn" color="primary" aria-label="upload picture avatar" component="span">
+              <PhotoCamera />
+            </IconButton>
+          </label><br />
           <Button
             variant="contained"
             color="default"

@@ -30,9 +30,7 @@ class Save extends Component {
                         return (
                             <Card className="rootSave" key={item.title}>
                                 <CardHeader avatar={
-                                    <Avatar aria-label="recipe" className="avatar">
-                                        {item.avatar}
-                                    </Avatar>
+                                    <Avatar aria-label="recipe" className="avatar" alt={item.title} src={item.avatar} />
                                 }
                                     title={item.title}
                                     subheader="September 14, 2016"

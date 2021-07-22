@@ -17,6 +17,17 @@ import BookmarkIcon from "@material-ui/icons/Bookmark"
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
 import './Profile.css'
 import { HOMEPAGE, HOMEPATH, LIKED, POSTED_BY, NO_PROFILE_ITEMS } from '../../Common/CommonConstants'
+import { withStyles } from '@material-ui/core/styles';
+import Badge from '@material-ui/core/Badge';
+
+const StyledBadge = withStyles(() => ({
+    badge: {
+        backgroundColor: '#44b700',
+        color: '#44b700'
+    }
+}))(Badge);
+
+let dataAvailable = false
 
 class Profile extends Component {
     render() {
@@ -24,15 +35,24 @@ class Profile extends Component {
             <div>
                 <AppHeader page={HOMEPAGE} path={HOMEPATH} />
                 {this.props.newsFeedListData &&
-                    this.props.newsFeedListData.length ? <div className="newsFeedProfileBody">
-                    {this.props.newsFeedListData.map((item) => {
-                        if (item.owner === this.props.username)
-                            return (
-                                <Card className="rootProfile" key={item.title}>
+                    this.props.newsFeedListData.length ?
+                    <div className="newsFeedProfileBody">
+                        {this.props.newsFeedListData.map((item, index) => {
+                            if (item.owner === this.props.username) {
+                                dataAvailable = true
+                                return (<Card className="rootProfile" key={index}>
                                     <CardHeader avatar={
-                                        <Avatar aria-label="recipe" className="avatar">
-                                            {item.avatar}
-                                        </Avatar>
+                                        item.owner == this.props.username ?
+                                            <StyledBadge
+                                                overlap="circular"
+                                                anchorOrigin={{
+                                                    vertical: 'bottom',
+                                                    horizontal: 'right'
+                                                }}
+                                                variant="dot"
+                                            >
+                                                <Avatar aria-label="recipe" alt={item.title} src={item.avatar} />
+                                            </StyledBadge> : <Avatar aria-label="recipe" alt={item.title} src={item.avatar} />
                                     }
                                         title={item.title}
                                         subheader="September 14, 2016"
@@ -67,12 +87,12 @@ class Profile extends Component {
                                         color="textSecondary">
                                         {POSTED_BY} {item.owner}
                                     </Typography>
-                                </Card>
-                            )
-                        else return <div className="noProfileItemsDiv">{NO_PROFILE_ITEMS}</div>
-                    })}
-                </div>
-                    : <div className="noProfileItemsDiv">{NO_PROFILE_ITEMS}</div>
+                                </Card>)
+                            }
+                        })}
+                        {!dataAvailable ? <div id="heloo" className="noProfileItemsDiv">{NO_PROFILE_ITEMS}</div> : ""}
+                    </div>
+                    : <div id="hi" className="noProfileItemsDiv">{NO_PROFILE_ITEMS}</div>
                 }
             </div>
         )

@@ -29,7 +29,7 @@
   }
 
   .headerLeftIcons{
-    margin-left: 70%;
+    margin-left: auto
   }
 
 .seachIcon{
@@ -41,5 +41,5 @@
   }
   
   .headerDiv{
-    height: 50px;
+    height: fit-content;
   }

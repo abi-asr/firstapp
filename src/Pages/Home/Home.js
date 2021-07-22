@@ -18,6 +18,15 @@ import "./Home.css"
 import { savedList } from "../../action/commonAction"
 import AppHeader from "../../Components/AppHeader/AppHeader"
 import { LIKED, NO_HOME_ITEMS, POSTED_BY, SAVEPAGE, SAVEPATH } from "../../Common/CommonConstants"
+import { withStyles } from '@material-ui/core/styles';
+import Badge from '@material-ui/core/Badge';
+
+const StyledBadge = withStyles(() => ({
+  badge: {
+    backgroundColor: '#44b700',
+    color: '#44b700'
+  }
+}))(Badge);
 
 let savedListArray = []
 export class Home extends Component {
@@ -88,43 +97,54 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <AppHeader page={SAVEPAGE} path={SAVEPATH} />
+        <AppHeader page={SAVEPAGE} path={SAVEPATH}/>
         {this.props.newsFeedListData &&
-                    this.props.newsFeedListData.length ?
-        <div className="newsFeedBody">
-          {this.props.newsFeedListData.map((item) => {
-            return (
-              <Card className="root" key={item.title}>
-                <CardHeader avatar={
-                  <Avatar aria-label="recipe" > {item.avatar}</Avatar>}
-                  title={item.title}
-                  subheader="September 14, 2016" />
-                <CardMedia
-                  className="media"
-                  image={item.image}
-                  title={item.title} />
-                <CardContent>
+          this.props.newsFeedListData.length ?
+          <div className="newsFeedBody">
+            {this.props.newsFeedListData.map((item) => {
+              return (
+                <Card className="root" key={item.title}>
+                  <CardHeader avatar={
+                    item.owner == this.props.username ?
+                      <StyledBadge
+                        overlap="circular"
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'right',
+                        }}
+                        variant="dot"
+                      >
+                        <Avatar aria-label="recipe" alt={item.title} src={item.avatar} />
+                      </StyledBadge> : <Avatar aria-label="recipe" alt={item.title} src={item.avatar} />
+                  }
+                    title={item.title}
+                    subheader="September 14, 2016" />
+                  <CardMedia
+                    className="media"
+                    image={item.image}
+                    title={item.title} />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary">
+                      {item.description}
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    {this.likeRender(item)}
+                    <IconButton aria-label="share" style={{ cursor: 'not-allowed' }} > <ShareIcon /></IconButton>
+                    {this.saveRender(item)}
+                  </CardActions>
                   <Typography
-                    variant="body2"
-                    color="textSecondary">
-                    {item.description}
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  {this.likeRender(item)}
-                  <IconButton aria-label="share" style={{ cursor: 'not-allowed' }} > <ShareIcon /></IconButton>
-                  {this.saveRender(item)}
-                </CardActions>
-                <Typography
                     variant="body2"
                     className="postedByName"
                     color="textSecondary">
                     {POSTED_BY} {item.owner}
                   </Typography>
-              </Card>
-            )
-          })}
-        </div>:   <div className="noHomeItemsDiv">{NO_HOME_ITEMS}</div>}
+                </Card>
+              )
+            })}
+          </div> : <div className="noHomeItemsDiv">{NO_HOME_ITEMS}</div>}
       </div>
     )
   }
